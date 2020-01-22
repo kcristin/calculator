@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Calculator</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>CALCULATOR</header>
+
+    <div class="calc">
+        <form class="input">
+            <input type="text" id="input">
+            <button id="backspace"><i class="material-icons">backspace</i></button>
+        </form>
+
+        <div class="buttons">
+
+            <div class="numbers"></div>
+            
+            <div class="operators">
+                <button id="add" class="function-button"><i class="material-icons">add</i></button>
+                <button id="subtract" class="function-button"><i class="material-icons">remove</i></button>
+                <br>
+                <button id="multiply" class="function-button"><i class="material-icons">clear</i></button>
+                <button id="divide" class="function-button"><i><img id="divide-icon" src="images/divide.png"></i></button>
+                <br>
+                <button id="equal" class="function-button"><i class="material-icons">drag_handle</i></button>
+            </div>
+        </div>
+    </div>
+
+    <script href="functions.js">
+        let numbers = document.querySelector('.numbers');
+        let input = document.querySelector('#input');
+        let add = document.querySelector('#add');
+        let subtract = document.querySelector('#subtract');
+        let multiply = document.querySelector('#multiply')
+        let divide = document.querySelector('#divide');
+        let equals = document.querySelector('#equal');
+
+        // Create value buttons and add event listener to add values to input
+        let num = 1;
+        while (num <= 9) {
+            let row = 0;
+            while (row < 3) {
+                let newNum = document.createElement('button');
+                newNum.innerHTML = `<button id='dig_${num}' style='width: 56px; height: 50px;'>${num}</button>`;
+                numbers.appendChild(newNum);
+                let digit = {'value': `${num}`};
+                newNum.addEventListener('click', () => {
+                    input.value += digit['value'];
+                });
+                num++;
+                row++;
+            }
+            let newBreak = document.createElement('br');
+            numbers.appendChild(newBreak);
+            row = 0;
+        }
+        let lastNum = document.createElement('button');
+        lastNum.innerHTML = "<button id='dig_0' style='width: 56px; height: 50px;'>0</button>";
+        numbers.appendChild(lastNum);
+        let last_dig = {'value': '0'};
+        lastNum.addEventListener('click', () => {
+            input.value += last_dig['value'];
+        });
+
+        // Add event listener to add button to add '+' to input on click
+        add.addEventListener('click', () => {
+            input.value += '+';
+        });
+
+        // Add event listener to subtract button to add '-' to input on click
+        subtract.addEventListener('click', () => {
+            input.value += '-';
+        });
+
+        // Add event listener to multiply button to add '*' to input on click
+        multiply.addEventListener('click', () => {
+            input.value += '*';
+        }); 
+
+        // Add event listener to divide button to add '/' to input on click
+        divide.addEventListener('click', () => {
+            input.value += '/';
+        });
+
+        // Add event listener to equals button to call operate() on click
+        equals.addEventListener('click', () => {
+            let inputArray = input.value.split(/[\*\/\+-]/);
+            console.log(inputArray);
+
+            for (let i = 0; i < inputArray.length; i++) {
+                if (inputArray[i] === /[\*\/\+-]/g) {
+                    console.log("OPERATOR");
+                    let operator = inputArray[i];
+                    let int1 = inputArray[i - 1];
+                    let int2 = inputArray[i + 1];
+                    return operate(operator, int1, int2);
+                } else {
+                    console.log("OPERAND");
+                    continue;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

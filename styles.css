@@ -1,0 +1,40 @@
+body {
+    text-align: center;
+}
+
+.calc {
+    display: inline-block;
+}
+
+#input {
+    width: 275px;
+    height: 50px;
+}
+
+#backspace {
+    width: 56px;
+    height: 50px;
+}
+
+.buttons {
+    text-align: center;
+}
+
+.numbers {
+    display: inline-block;
+}
+
+.operators {
+    display: inline-block;
+}
+
+#divide-icon {
+    image-rendering: crisp-edges;
+    width: 24px;
+    height: 24px;
+}
+
+.function-button {
+    width: 56px;
+    height: 50px;
+}
