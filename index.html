@@ -75,7 +75,7 @@
             input.value += last_dig['value'];
         });
 
-        // Add event listener to backspace to remove last entered element
+        // Backspace button removes last entered element
         backspace.addEventListener('click', () => {
             let inputArray = input.value.split('');
             inputArray.pop();
@@ -84,30 +84,30 @@
             input.value = backspacedInput;
         });
 
-        // Add event listener to add button to add '+' to input on click
+        // Add button adds '+' to input on click
         addButton.addEventListener('click', () => {
             input.value += '+';
         });
 
-        // Add event listener to subtract button to add '-' to input on click
+        // Subtract button adds '-' to input on click
         subtractButton.addEventListener('click', () => {
             input.value += '-';
         });
 
-        // Add event listener to multiply button to add '*' to input on click
+        // Multiply button adds '*' to input on click
         multiplyButton.addEventListener('click', () => {
             input.value += '*';
         }); 
 
-        // Add event listener to divide button to add '/' to input on click
+        // Divide button adds '/' to input on click
         divideButton.addEventListener('click', () => {
             input.value += '/';
         });
 
-        // Add event listener to equals button to call operate() for 
+        // Equals button sets up calculation and calls operate() for each operation 
         equals.addEventListener('click', () => {
 
-            // Adds spaces between operators and operands in input to create distinction for function
+            // Adds spaces between operators and operands in input to create distinction for calculation
             let addSpaces = (input) => {
                 let inputArray = input.split('');
                 for (let i = 0; i < inputArray.length; i++) {
