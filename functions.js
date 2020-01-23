@@ -23,17 +23,17 @@ let operate = (operator, int1, int2) => {
 }
 
 let add = (int1, int2) => {
-    return int1 + int2;
+    return console.log(+int1 + +int2);
 }
 
 let subtract = (int1, int2) => {
-    return int1 - int2;
+    return console.log(int1 - int2);
 }
 
 let multiply = (int1, int2) => {
-    return int1 * int2;
+    return console.log(int1 * int2);
 }
 
 let divide = (int1, int2) => {
-    return int1 / 2;
+    return console.log(int1 / 2);
 }

@@ -34,13 +34,14 @@
         </div>
     </div>
 
-    <script href="functions.js">
+    <script src="functions.js"></script>
+    <script>
         let numbers = document.querySelector('.numbers');
         let input = document.querySelector('#input');
-        let add = document.querySelector('#add');
-        let subtract = document.querySelector('#subtract');
-        let multiply = document.querySelector('#multiply')
-        let divide = document.querySelector('#divide');
+        let addButton = document.querySelector('#add');
+        let subtractButton = document.querySelector('#subtract');
+        let multiplyButton = document.querySelector('#multiply')
+        let divideButton = document.querySelector('#divide');
         let equals = document.querySelector('#equal');
 
         // Create value buttons and add event listener to add values to input
@@ -71,39 +72,60 @@
         });
 
         // Add event listener to add button to add '+' to input on click
-        add.addEventListener('click', () => {
+        addButton.addEventListener('click', () => {
             input.value += '+';
         });
 
         // Add event listener to subtract button to add '-' to input on click
-        subtract.addEventListener('click', () => {
+        subtractButton.addEventListener('click', () => {
             input.value += '-';
         });
 
         // Add event listener to multiply button to add '*' to input on click
-        multiply.addEventListener('click', () => {
+        multiplyButton.addEventListener('click', () => {
             input.value += '*';
         }); 
 
         // Add event listener to divide button to add '/' to input on click
-        divide.addEventListener('click', () => {
+        divideButton.addEventListener('click', () => {
             input.value += '/';
         });
 
         // Add event listener to equals button to call operate() on click
         equals.addEventListener('click', () => {
-            let inputArray = input.value.split(/[\*\/\+-]/);
-            console.log(inputArray);
 
-            for (let i = 0; i < inputArray.length; i++) {
-                if (inputArray[i] === /[\*\/\+-]/g) {
-                    console.log("OPERATOR");
-                    let operator = inputArray[i];
-                    let int1 = inputArray[i - 1];
-                    let int2 = inputArray[i + 1];
-                    return operate(operator, int1, int2);
+            // Adds spaces between operators and operands in input to create distinction for function
+            let addSpaces = (input) => {
+                let inputArray = input.split('');
+                for (let i = 0; i < inputArray.length; i++) {
+                    if ((inputArray[i] === '*') || (inputArray[i] === '/') || (inputArray[i] === '+') || (inputArray[i] === '-')) {
+                        if ((inputArray[i - 1] !== ' ') && (inputArray[i + 1] !== ' ')) {
+                            inputArray.splice(i, 0, ' ');
+                            inputArray.splice((i + 2), 0, ' ');
+                        
+                        } else if (inputArray[i - 1] !== ' ') {
+                            inputArray.splice(i, 0, ' ');
+                        
+                        } else if (inputArray[i + 1] !== ' ') {
+                            inputArray.splice((i + 1), 0, ' ');
+                        }
+                    }
+                }
+                return inputArray.join('');
+            }
+
+            let inputArray = addSpaces(input.value);
+            inputArray = inputArray.split(' ')
+
+            // Cycles through inputArray and calls operate() if operator is found
+            for (let j = 0; j < inputArray.length; j++) {
+                if ((inputArray[j] === '*') || (inputArray[j] === '/') || (inputArray[j] === '+') || (inputArray[j] === '-')) {
+                    let operator = inputArray[j];
+                    let int1 = inputArray[j - 1];
+                    let int2 = inputArray[j + 1];
+                    operate(operator, int1, int2);
+                
                 } else {
-                    console.log("OPERAND");
                     continue;
                 }
             }
