@@ -13,10 +13,12 @@
     <header>CALCULATOR</header>
 
     <div class="calc">
-        <form class="input">
-            <input type="text" id="input">
+        <div class="input-area">
+            <form id="input">
+                <input type="text" id="function">
+            </form>
             <button id="backspace"><i class="material-icons">backspace</i></button>
-        </form>
+        </div>
 
         <div class="buttons">
 
@@ -37,7 +39,9 @@
     <script src="functions.js"></script>
     <script>
         let numbers = document.querySelector('.numbers');
-        let input = document.querySelector('#input');
+        let input = document.querySelector('#function');
+        let backspace = document.querySelector('#backspace');
+
         let addButton = document.querySelector('#add');
         let subtractButton = document.querySelector('#subtract');
         let multiplyButton = document.querySelector('#multiply')
@@ -69,6 +73,15 @@
         let last_dig = {'value': '0'};
         lastNum.addEventListener('click', () => {
             input.value += last_dig['value'];
+        });
+
+        // Add event listener to backspace to remove last entered element
+        backspace.addEventListener('click', () => {
+            let inputArray = input.value.split('');
+            inputArray.pop();
+            let backspacedInput = inputArray.join('');
+
+            input.value = backspacedInput;
         });
 
         // Add event listener to add button to add '+' to input on click
@@ -117,8 +130,10 @@
             let inputArray = addSpaces(input.value);
             inputArray = inputArray.split(' ');
 
+            // Run order of operations function
             let finalVal = pemdas(inputArray);
 
+            // Output final value to screen
             input.value = finalVal;
         });
     </script>
