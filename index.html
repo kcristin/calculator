@@ -91,7 +91,7 @@
             input.value += '/';
         });
 
-        // Add event listener to equals button to call operate() on click
+        // Add event listener to equals button to call operate() for 
         equals.addEventListener('click', () => {
 
             // Adds spaces between operators and operands in input to create distinction for function
@@ -115,20 +115,11 @@
             }
 
             let inputArray = addSpaces(input.value);
-            inputArray = inputArray.split(' ')
+            inputArray = inputArray.split(' ');
 
-            // Cycles through inputArray and calls operate() if operator is found
-            for (let j = 0; j < inputArray.length; j++) {
-                if ((inputArray[j] === '*') || (inputArray[j] === '/') || (inputArray[j] === '+') || (inputArray[j] === '-')) {
-                    let operator = inputArray[j];
-                    let int1 = inputArray[j - 1];
-                    let int2 = inputArray[j + 1];
-                    operate(operator, int1, int2);
-                
-                } else {
-                    continue;
-                }
-            }
+            let finalVal = pemdas(inputArray);
+
+            return finalVal;
         });
     </script>
 </body>
