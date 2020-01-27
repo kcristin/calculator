@@ -17,7 +17,7 @@
             <form id="input">
                 <input type="text" id="function">
             </form>
-            <button id="backspace"><i class="material-icons">backspace</i></button>
+            <button id="backspace"><i id="backspace-icon" class="material-icons">backspace</i></button>
         </div>
 
         <div class="buttons">
@@ -25,23 +25,29 @@
             <div class="numbers"></div>
             
             <div class="operators">
-                <button id="add" class="function-button"><i class="material-icons">add</i></button>
-                <button id="subtract" class="function-button"><i class="material-icons">remove</i></button>
+                <!-- <button id="open-parenthesis" class="operation-button"><strong>(</strong></button>
+                <button id="close-parenthesis" class="operation-button"><strong>)</strong></button>
+                <br> -->
+                <button id="add" class="operation-button"><i class="material-icons">add</i></button>
+                <button id="subtract" class="operation-button"><i class="material-icons">remove</i></button>
                 <br>
-                <button id="multiply" class="function-button"><i class="material-icons">clear</i></button>
-                <button id="divide" class="function-button"><i><img id="divide-icon" src="images/divide.png"></i></button>
+                <button id="multiply" class="operation-button"><i class="material-icons">clear</i></button>
+                <button id="divide" class="operation-button"><i><img id="divide-icon" src="images/divide.png"></i></button>
                 <br>
-                <button id="equal" class="function-button"><i class="material-icons">drag_handle</i></button>
+                <button id="equal" class="operation-button"><i class="material-icons">drag_handle</i></button>
             </div>
         </div>
     </div>
 
     <script src="functions.js"></script>
     <script>
+        let digs = document.querySelector('.digs')
         let numbers = document.querySelector('.numbers');
         let input = document.querySelector('#function');
         let backspace = document.querySelector('#backspace');
 
+        // let openParentheses = document.querySelector('#open-parenthesis');
+        // let closeParentheses = document.querySelector('#close-parenthesis');
         let addButton = document.querySelector('#add');
         let subtractButton = document.querySelector('#subtract');
         let multiplyButton = document.querySelector('#multiply')
@@ -54,11 +60,15 @@
             let row = 0;
             while (row < 3) {
                 let newNum = document.createElement('button');
-                newNum.innerHTML = `<button id='dig_${num}' style='width: 56px; height: 50px;'>${num}</button>`;
+                newNum.innerHTML = `<button id='dig_${num}' class='digs' style='width: 50px; height: 50px; margin: 0;'>${num}</button>`;
                 numbers.appendChild(newNum);
                 let digit = {'value': `${num}`};
-                newNum.addEventListener('click', () => {
+                newNum.addEventListener('mousedown', () => {
                     input.value += digit['value'];
+                    newNum.style.backgroundColor = '#908686';
+                });
+                newNum.addEventListener('mouseup', () => {
+                    newNum.style.backgroundColor = 'transparent';
                 });
                 num++;
                 row++;
@@ -68,12 +78,16 @@
             row = 0;
         }
         let lastNum = document.createElement('button');
-        lastNum.innerHTML = "<button id='dig_0' style='width: 56px; height: 50px;'>0</button>";
+        lastNum.innerHTML = "<button id='dig_0' class='digs' style='width: 50px; height: 50px; margin: 0;'>0</button>";
         numbers.appendChild(lastNum);
         let last_dig = {'value': '0'};
-        lastNum.addEventListener('click', () => {
+        lastNum.addEventListener('mousedown', () => {
             input.value += last_dig['value'];
+            lastNum.style.backgroundColor = '#908686';
         });
+        lastNum.addEventListener('mouseup', () => {
+                    lastNum.style.backgroundColor = 'transparent';
+                });
 
         // Backspace button removes last entered element
         backspace.addEventListener('click', () => {
@@ -83,6 +97,16 @@
 
             input.value = backspacedInput;
         });
+
+        // Open parenthesis adds '(' to input on click
+        // openParentheses.addEventListener('click', () => {
+        //     input.value += '(';
+        // });
+
+        // Close parenthesis adds ')' to input on click
+        // closeParentheses.addEventListener('click', () => {
+        //     input.value += ')';
+        // });
 
         // Add button adds '+' to input on click
         addButton.addEventListener('click', () => {
@@ -104,6 +128,11 @@
             input.value += '/';
         });
 
+        // Click event for buttons
+        button.addEventListener('', () => {
+            button.style.cssText = 'background-color: #908686';
+        });
+
         // Equals button sets up calculation and calls operate() for each operation 
         equals.addEventListener('click', () => {
 
@@ -111,7 +140,7 @@
             let addSpaces = (input) => {
                 let inputArray = input.split('');
                 for (let i = 0; i < inputArray.length; i++) {
-                    if ((inputArray[i] === '*') || (inputArray[i] === '/') || (inputArray[i] === '+') || (inputArray[i] === '-')) {
+                    if ((inputArray[i] === '*') || (inputArray[i] === '/') || (inputArray[i] === '+') || (inputArray[i] === '-') || (inputArray[i] === '(') || (inputArray[i] === ')')) {
                         if ((inputArray[i - 1] !== ' ') && (inputArray[i + 1] !== ' ')) {
                             inputArray.splice(i, 0, ' ');
                             inputArray.splice((i + 2), 0, ' ');
@@ -131,7 +160,7 @@
             inputArray = inputArray.split(' ');
 
             // Run order of operations function
-            let finalVal = pemdas(inputArray);
+            let finalVal = pemdas(inputArray, false);
 
             // Output final value to screen
             input.value = finalVal;
