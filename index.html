@@ -87,7 +87,7 @@
         });
         lastNum.addEventListener('mouseup', () => {
                     lastNum.style.backgroundColor = 'transparent';
-                });
+        });
 
         // Backspace button removes last entered element
         backspace.addEventListener('click', () => {
@@ -126,11 +126,6 @@
         // Divide button adds '/' to input on click
         divideButton.addEventListener('click', () => {
             input.value += '/';
-        });
-
-        // Click event for buttons
-        button.addEventListener('', () => {
-            button.style.cssText = 'background-color: #908686';
         });
 
         // Equals button sets up calculation and calls operate() for each operation 
