@@ -4,6 +4,10 @@ body {
 
 .calc {
     display: inline-block;
+    background-color: #2e2e2e;
+    margin: 10px;
+    padding: 10px;
+    border-radius: 20px;
 }
 
 .input-area {
@@ -20,16 +24,42 @@ body {
 #function {
     width: inherit;
     height: inherit;
+    background-color: #79ecf5;
+    border-radius: 7px;
+    font-size: 18pt;
+    font-family: monospace;
+    outline: none;
+    text-align: center;
 }
 
 #backspace {
     width: 56px;
     height: 50px;
     display: inline-block;
+    background-color: transparent;
+    outline: none;
+}
+
+#backspace-icon {
+    color: #d3c9c9;
+}
+
+button {
+    margin: 2px;
+    border-radius: 25px;
+    background-color: transparent;
+    border-color: transparent;
+    outline: none;
+    font-family: 10pt;
 }
 
 .buttons {
     text-align: center;
+}
+
+.digs {
+    background-color: #d3c9c9;
+    outline: none;
 }
 
 .numbers {
@@ -40,13 +70,18 @@ body {
     display: inline-block;
 }
 
+/* #open-parenthesis, #close-parenthesis {
+    font-size: 20px;
+} */
+
 #divide-icon {
     image-rendering: crisp-edges;
     width: 24px;
     height: 24px;
 }
 
-.function-button {
+.operation-button {
     width: 56px;
     height: 50px;
+    background-color: #ef8b22;
 }
