@@ -25,9 +25,9 @@
             <div class="numbers"></div>
             
             <div class="operators">
-                <!-- <button id="open-parenthesis" class="operation-button"><strong>(</strong></button>
+                <button id="open-parenthesis" class="operation-button"><strong>(</strong></button>
                 <button id="close-parenthesis" class="operation-button"><strong>)</strong></button>
-                <br> -->
+                <br>
                 <button id="add" class="operation-button"><i class="material-icons">add</i></button>
                 <button id="subtract" class="operation-button"><i class="material-icons">remove</i></button>
                 <br>
@@ -35,6 +35,7 @@
                 <button id="divide" class="operation-button"><i><img id="divide-icon" src="images/divide.png"></i></button>
                 <br>
                 <button id="equal" class="operation-button"><i class="material-icons">drag_handle</i></button>
+                <button id="clear">AC</button>
             </div>
         </div>
     </div>
@@ -46,8 +47,8 @@
         let input = document.querySelector('#function');
         let backspace = document.querySelector('#backspace');
 
-        // let openParentheses = document.querySelector('#open-parenthesis');
-        // let closeParentheses = document.querySelector('#close-parenthesis');
+        let openParentheses = document.querySelector('#open-parenthesis');
+        let closeParentheses = document.querySelector('#close-parenthesis');
         let addButton = document.querySelector('#add');
         let subtractButton = document.querySelector('#subtract');
         let multiplyButton = document.querySelector('#multiply')
@@ -99,14 +100,14 @@
         });
 
         // Open parenthesis adds '(' to input on click
-        // openParentheses.addEventListener('click', () => {
-        //     input.value += '(';
-        // });
+        openParentheses.addEventListener('click', () => {
+            input.value += '(';
+        });
 
         // Close parenthesis adds ')' to input on click
-        // closeParentheses.addEventListener('click', () => {
-        //     input.value += ')';
-        // });
+        closeParentheses.addEventListener('click', () => {
+            input.value += ')';
+        });
 
         // Add button adds '+' to input on click
         addButton.addEventListener('click', () => {
@@ -155,7 +156,7 @@
             inputArray = inputArray.split(' ');
 
             // Run order of operations function
-            let finalVal = pemdas(inputArray, false);
+            let finalVal = pemdas(inputArray);
 
             // Output final value to screen
             input.value = finalVal;
