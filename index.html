@@ -214,24 +214,24 @@
         });
 
 
-        // // Hitting enter sets up calculation and calls operate() for each operation 
-        // calc.addEventListener('keydown', function (e) {
-        //     if (e.keyCode === 13) {
-        //         let inputArray = addSpaces(input.value);
-        //         inputArray = inputArray.split(' ');
+        // Hitting enter sets up calculation and calls operate() for each operation 
+        calc.addEventListener('keydown', function (e) {
+            if (e.keyCode === 13) {
+                let inputArray = addSpaces(input.value);
+                inputArray = inputArray.split(' ');
 
-        //         // Run order of operations function
-        //         let finalVal = pemdas(inputArray);
+                // Run order of operations function
+                let finalVal = pemdas(inputArray);
             
-        //         if (finalVal % 1 !== 0) {
-        //             finalVal = finalVal.toFixed(4);
-        //         }
+                if (finalVal % 1 !== 0) {
+                    finalVal = finalVal.toFixed(4);
+                }
 
-        //         // Output final value to screen
-        //         input.value = finalVal;
-        //         checkInputVal(input.value);
-        //     }
-        // });
+                // Output final value to screen
+                input.value = finalVal;
+                checkInputVal(input.value);
+            }
+        });
 
     </script>
 </body>
