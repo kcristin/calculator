@@ -120,7 +120,16 @@
 
 
         // Backspace button removes last entered element
-        backspace.addEventListener('click', () => {
+        backspace.addEventListener('mousedown', () => {
+            backspace.style.opacity = '0.5';
+        });
+
+        backspace.addEventListener('mouseleave', () => {
+            backspace.style.opacity = '1';
+        });
+
+        backspace.addEventListener('mouseup', () => {
+            backspace.style.opacity = '1';
             let inputArray = input.value.split('');
             inputArray.pop();
             let backspacedInput = inputArray.join('');
@@ -283,7 +292,7 @@
             input.value = finalVal;
             checkInputVal(input.value);
         });
-        
+
     </script>
 </body>
 </html>
