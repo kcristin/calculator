@@ -15,7 +15,7 @@
     <div class="calc">
         <div class="input-area">
             <form id="input">
-                <input type="text" id="function">
+                <input type="text" id="function" value="">
             </form>
             <button id="backspace"><i id="backspace-icon" class="material-icons">backspace</i></button>
         </div>
@@ -42,10 +42,12 @@
 
     <script src="functions.js"></script>
     <script>
+        
         let digs = document.querySelector('.digs')
         let numbers = document.querySelector('.numbers');
         let input = document.querySelector('#function');
         let backspace = document.querySelector('#backspace');
+        let clear = document.querySelector('#clear');
 
         let openParentheses = document.querySelector('#open-parenthesis');
         let closeParentheses = document.querySelector('#close-parenthesis');
@@ -54,6 +56,20 @@
         let multiplyButton = document.querySelector('#multiply')
         let divideButton = document.querySelector('#divide');
         let equals = document.querySelector('#equal');
+
+        // Change clear button depnding on input value
+        let checkInputVal = (value) => {
+            if (value !== input.defaultValue) {
+                clear.innerHTML = 'C';
+        
+            } else if (value === input.defaultValue) {
+                clear.innerHTML = 'AC';
+        
+            } else {
+                console.log('ERROR');
+            }
+        };
+
 
         // Create value buttons and add event listener to add values to input
         let num = 1;
@@ -65,11 +81,17 @@
                 numbers.appendChild(newNum);
                 let digit = {'value': `${num}`};
                 newNum.addEventListener('mousedown', () => {
-                    input.value += digit['value'];
-                    newNum.style.backgroundColor = '#908686';
+                    newNum.style.opacity = '0.5';
                 });
+
+                newNum.addEventListener('mouseleave', () => {
+                    newNum.style.opacity = '1';
+                });
+
                 newNum.addEventListener('mouseup', () => {
-                    newNum.style.backgroundColor = 'transparent';
+                    input.value += digit['value'];
+                    newNum.style.opacity = '1';
+                    checkInputVal(input.value);
                 });
                 num++;
                 row++;
@@ -83,12 +105,19 @@
         numbers.appendChild(lastNum);
         let last_dig = {'value': '0'};
         lastNum.addEventListener('mousedown', () => {
+            lastNum.style.opacity = '0.5';
+        });
+
+        lastNum.addEventListener('mouseleave', () => {
+            lastNum.style.opacity = '1';
+        });
+
+        lastNum.addEventListener('mousedown', () => {
             input.value += last_dig['value'];
-            lastNum.style.backgroundColor = '#908686';
+            lastNum.style.opacity = '1';
+            checkInputVal(input.value);
         });
-        lastNum.addEventListener('mouseup', () => {
-                    lastNum.style.backgroundColor = 'transparent';
-        });
+
 
         // Backspace button removes last entered element
         backspace.addEventListener('click', () => {
@@ -97,40 +126,132 @@
             let backspacedInput = inputArray.join('');
 
             input.value = backspacedInput;
+            checkInputVal(input.value);
         });
+
 
         // Open parenthesis adds '(' to input on click
-        openParentheses.addEventListener('click', () => {
-            input.value += '(';
+        openParentheses.addEventListener('mousedown', () => {
+            openParentheses.style.opacity = '0.5';
         });
+
+        openParentheses.addEventListener('mouseleave', () => {
+            openParentheses.style.opacity = '1';
+        });
+
+        openParentheses.addEventListener('mouseup', () => {
+            input.value += '(';
+            openParentheses.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
 
         // Close parenthesis adds ')' to input on click
-        closeParentheses.addEventListener('click', () => {
-            input.value += ')';
+        closeParentheses.addEventListener('mousedown', () => {
+            closeParentheses.style.opacity = '0.5';
         });
+
+        closeParentheses.addEventListener('mouseleave', () => {
+            closeParentheses.style.opacity = '1';
+        });
+
+        closeParentheses.addEventListener('mouseup', () => {
+            input.value += ')';
+            closeParentheses.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
 
         // Add button adds '+' to input on click
-        addButton.addEventListener('click', () => {
-            input.value += '+';
+        addButton.addEventListener('mousedown', () => {
+            addButton.style.opacity = '0.5';
         });
+
+        addButton.addEventListener('mouseleave', () => {
+            addButton.style.opacity = '1';
+        });
+
+        addButton.addEventListener('mouseup', () => {
+            input.value += '+';
+            addButton.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
 
         // Subtract button adds '-' to input on click
-        subtractButton.addEventListener('click', () => {
-            input.value += '-';
+        subtractButton.addEventListener('mousedown', () => {
+            subtractButton.style.opacity = '0.5';
         });
+
+        subtractButton.addEventListener('mouseleave', () => {
+            subtractButton.style.opacity = '1';
+        });
+
+        subtractButton.addEventListener('mouseup', () => {
+            input.value += '-';
+            subtractButton.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
 
         // Multiply button adds '*' to input on click
-        multiplyButton.addEventListener('click', () => {
-            input.value += '*';
-        }); 
-
-        // Divide button adds '/' to input on click
-        divideButton.addEventListener('click', () => {
-            input.value += '/';
+        multiplyButton.addEventListener('mousedown', () => {
+            multiplyButton.style.opacity = '0.5';
+        });
+        
+        multiplyButton.addEventListener('mouseleave', () => {
+            multiplyButton.style.opacity = '1';
         });
 
-        // Equals button sets up calculation and calls operate() for each operation 
-        equals.addEventListener('click', () => {
+        multiplyButton.addEventListener('mouseup', () => {
+            input.value += '*';
+            multiplyButton.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
+
+        // Divide button adds '/' to input on click
+        divideButton.addEventListener('mousedown', () => {
+            divideButton.style.opacity = '0.5';
+        });
+
+        divideButton.addEventListener('mouseleave', () => {
+            divideButton.style.opacity = '1';
+        });
+
+        divideButton.addEventListener('mouseup', () => {
+            input.value += '/';
+            divideButton.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
+
+        // Clear button clears input screen
+        clear.addEventListener('mousedown', () => {
+            clear.style.opacity = '0.5';
+        });
+
+        clear.addEventListener('mouseleave', () => {
+            clear.style.opacity = '1';
+        });
+
+        clear.addEventListener('mouseup', () => {
+            input.value = '';
+            clear.style.opacity = '1';
+            checkInputVal(input.value);
+        });
+
+
+        // Equals button sets up calculation and calls operate() for each operation
+        equals.addEventListener('mousedown', () => {
+            equals.style.opacity = '0.5';
+        });
+
+        equals.addEventListener('mouseleave', () => {
+            equals.style.opacity = '1';
+        });
+
+        equals.addEventListener('mouseup', () => {
 
             // Adds spaces between operators and operands in input to create distinction for calculation
             let addSpaces = (input) => {
@@ -160,7 +281,9 @@
 
             // Output final value to screen
             input.value = finalVal;
+            checkInputVal(input.value);
         });
+        
     </script>
 </body>
 </html>
