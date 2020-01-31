@@ -1,5 +1,11 @@
 body {
     text-align: center;
+    background-color: #fcf2fe;
+}
+
+header {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 20pt;
 }
 
 .calc {
@@ -15,7 +21,7 @@ body {
 }
 
 #input {
-    width: 275px;
+    width: 285px;
     height: 50px;
     margin: 20px;
     display: inline-block;
@@ -55,6 +61,14 @@ button {
 
 button:hover {
     opacity: 0.75;
+}
+
+button:hover::after {
+    opacity: 1;
+}
+
+button:active {
+    opacity: 0.5;
 }
 
 .buttons {
